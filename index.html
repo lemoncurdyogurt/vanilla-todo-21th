@@ -13,15 +13,20 @@
     <div>
       <div id="todayDate"></div>
       <p>오늘의 할 일을 기록해보세요</p>
+      <div id="count">
+        <p>🔥:<span class="todoCount">0</span></p>
+        <p>✅:<span class="doneCount">0</span></p>
+      </div>
       <form id="todoPost">
-        <div>
+        <span>
           <input id="todoRecord" type="text" placeholder="할 일 추가" />
-        </div>
-        <button class="submitBtn">등록</button>
+        </span>
+        <button id="submitBtn">등록</button>
       </form>
       <div>
-        <ul class="list"></ul>
+        <ul id="list"></ul>
       </div>
+
     </div>
     <script src="script.js"></script>
   </body>

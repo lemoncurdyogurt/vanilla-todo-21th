@@ -15,3 +15,28 @@ const yyyy_mm_dd = `${year}년 ${month}월 ${day}일 ${weekDay}요일`;
 document.getElementById("todayDate").textContent = yyyy_mm_dd;
 console.log(yyyy_mm_dd);
 
+//버튼 클릭 시, 할일 저장
+const submitBtn = document.getElementById("submitBtn");
+submitBtn.addEventListener("click", (event) => {
+  event.preventDefault(); //
+  const input = document.querySelector("input");
+  const text = input.value.trim(); //양 끝 공백 제거 후 text에 저장
+
+  if (text !== "") {
+    addToList(text);
+    input.value = ""; //사용자 입력칸 빈칸 리셋
+    input.focus(); //입력창에 포커스
+  }
+});
+
+function addToList(text) {
+  const list = document.querySelector("#list");
+  let li = document.createElement("li");
+  let checkBox = document.createElement("input");
+  checkBox.type = "checkbox";
+
+  li.append(checkBox); // 체크박스를 li 안에 추가
+  li.append(text); // 텍스트도 li 안에 추가
+  list.append(li); // 리스트에 li 추가
+}
+
