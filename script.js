@@ -33,7 +33,13 @@ submitBtn.addEventListener("click", (event) => {
   } else {
     alert("할 일을 작성해주세요!");
   }
+
+  getDoneCount();
+  getTodoCount();
+
 });
+
+let doneCount = 0;
 
 function addToList(text, checked) {
   const list = document.querySelector("#list");
@@ -63,6 +69,12 @@ function addToList(text, checked) {
 
     getTodoCount();
     getDoneCount();
+
+    let todos = JSON.parse(localStorage.getItem("todos")) || [];
+    if (doneCount === todos.length) {
+      alert("축하합니다! 모든 할 일을 다하셨어요!");
+    }
+    
   });
 
   //삭제버튼 클릭 시 해당 아이템 삭제
@@ -90,6 +102,9 @@ function saveLocalStorage(text, checked) {
 function loadList() {
   let todos = JSON.parse(localStorage.getItem("todos")) || [];
   todos.forEach(({ text, checked }) => addToList(text, checked));
+
+  getDoneCount();
+  getTodoCount();
 }
 
 function doneList(text, checked) {
@@ -113,11 +128,7 @@ function getTodoCount() {
 
 function getDoneCount() {
   let todos = JSON.parse(localStorage.getItem("todos")) || [];
-  let doneCount = todos.filter((todo) => todo.checked).length;
-
-  if (doneCount === todos.length) {
-    alert("축하합니다! 모든 할 일을 다하셨어요!");
-  }
+  doneCount = todos.filter((todo) => todo.checked).length;
 
   document.querySelector("#doneCount").innerHTML = doneCount;
 }
