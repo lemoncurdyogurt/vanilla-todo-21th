@@ -1,1 +1,133 @@
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #0c0c0d;
+}
+
+#header {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 21px rgb(146, 53, 110), 0 0 42px rgb(146, 53, 110),
+    0 0 82px rgb(146, 53, 110);
+  margin-bottom: 0px;
+}
+
+#main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 700px;
+}
+
+#date-count-container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto; /* 중앙 정렬 */
+}
+#todayDate{
+  font-size: 17px;
+}
+#count {
+  font-size: 14px;
+  display: flex;
+  gap: 15px;
+}
+
+#list {
+  list-style: none;
+}
+
+#list li {
+  font-size: 15px;
+  background: #2c2c2c;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+
+.explain {
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  border: 2px;
+  background-color: white;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(255, 0, 128, 0.3);
+}
+
+/* 체크박스 선택 시 */
+input[type="checkbox"]:checked {
+  background-color: #ff0080;
+  border-color: #ff0080;
+  box-shadow: 0px 0px 10px rgba(255, 0, 128, 0.7);
+}
+
+
+input[type="checkbox"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 3px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: translate(-50%, -50%) rotate(-45deg)
+}
+
+#todoPost{
+  margin-top: 35px;
+  position:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+
+button{
+  background: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 20px;
+  border-radius: 20px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.4);
+}
+
+#todoRecord{
+  width: 60%;
+  padding: 12px;
+  border-radius: 8px;
+}

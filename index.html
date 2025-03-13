@@ -7,22 +7,29 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="header">
+    <div id="header">
       <h1>To Do</h1>
-    </div>
-    <div>
-      <div id="todayDate"></div>
-      <p>오늘의 할 일을 기록해보세요</p>
-      <div id="count">
-        <p>🔥:<span id="todoCount">0</span>개</p>
-        <p>✅:<span id="doneCount">0</span>개</p>
+      <div class="explain">
+        <p>오늘의 할 일을 기록해보세요</p>
       </div>
+    </div>
+
+    <div id="main-content">
+      <div id="date-count-container">
+        <div id="todayDate"></div>
+        <div id="count">
+          <p>🔥:<span id="todoCount">0</span>개</p>
+          <p>✅:<span id="doneCount">0</span>개</p>
+        </div>
+      </div>
+
       <form id="todoPost">
         <span>
           <input id="todoRecord" type="text" placeholder="할 일 추가" />
         </span>
         <button id="submitBtn">등록</button>
       </form>
+      
       <div id="todolist">
         <ul id="list"></ul>
       </div>

@@ -23,7 +23,7 @@ submitBtn.addEventListener("click", (event) => {
   event.preventDefault(); //
   const input = document.querySelector("input");
   const text = input.value.trim(); //양 끝 공백 제거 후 text에 저장
-
+  
   if (text !== "") {
     //text기준으로 로컬 스토리지에 삭제되므로, 같은 text면 등록 방지
     if (sameTodo(text)) {
@@ -63,13 +63,15 @@ function addToList(text, checked) {
   if (checked) {
     span.style.textDecoration = "line-through";
     span.style.color = "grey";
+  }else{
+    span.style.color="white"
   }
 
   checkBox.addEventListener("change", () => {
     doneList(text, checkBox.checked);
 
     span.style.textDecoration = checkBox.checked ? "line-through" : "none";
-    span.style.color = checkBox.checked ? "grey" : "black";
+    span.style.color = checkBox.checked ? "grey" : "white";
 
     getTodoCount();
     getDoneCount();
