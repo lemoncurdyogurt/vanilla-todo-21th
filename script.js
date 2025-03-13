@@ -44,22 +44,38 @@ function addToList(text, checked) {
 
   let span = document.createElement("span");
   span.textContent = text;
+
+  //삭제 버튼 추가
+  let deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "삭제";
+
   //체크 여부에 따라 스타일 변경
   if (checked) {
     span.style.textDecoration = "line-through";
+    span.style.color = "grey";
   }
 
   checkBox.addEventListener("change", () => {
     doneList(text, checkBox.checked);
 
     span.style.textDecoration = checkBox.checked ? "line-through" : "none";
+    span.style.color = checkBox.checked ? "grey" : "black";
 
+    getTodoCount();
+    getDoneCount();
+  });
+
+  //삭제버튼 클릭 시 해당 아이템 삭제
+  deleteBtn.addEventListener("click", () => {
+    li.remove();
+    deleteLocalStorage(text);
     getTodoCount();
     getDoneCount();
   });
 
   li.append(checkBox);
   li.append(span);
+  li.append(deleteBtn);
   list.append(li); // 리스트에 li 추가
 }
 
@@ -99,11 +115,15 @@ function getDoneCount() {
   let todos = JSON.parse(localStorage.getItem("todos")) || [];
   let doneCount = todos.filter((todo) => todo.checked).length;
 
-  if (doneCount === todos.length){
-    alert("축하합니다! 모든 할 일을 다하셨어요!")
+  if (doneCount === todos.length) {
+    alert("축하합니다! 모든 할 일을 다하셨어요!");
   }
 
   document.querySelector("#doneCount").innerHTML = doneCount;
+}
 
-
+function deleteLocalStorage(text) {
+  let todos = JSON.parse(localStorage.getItem("todos")) || [];
+  todos = todos.filter((todo) => todo.text !== text);
+  localStorage.setItem("todos", JSON.stringify(todos));
 }
