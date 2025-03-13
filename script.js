@@ -13,7 +13,6 @@ const weekDay = getWeekDay(); //요일 함수 선언
 const yyyy_mm_dd = `${year}년 ${month}월 ${day}일 ${weekDay}요일`;
 //오늘의 날짜 띄우기
 document.getElementById("todayDate").textContent = yyyy_mm_dd;
-console.log(yyyy_mm_dd);
 
 //페이지 로드 시에 로컬스토리지에서 가져오기
 document.addEventListener("DOMContentLoaded", loadList);
