@@ -26,17 +26,23 @@ submitBtn.addEventListener("click", (event) => {
   const text = input.value.trim(); //양 끝 공백 제거 후 text에 저장
 
   if (text !== "") {
-    addToList(text, false);
-    saveLocalStorage(text, false);
-    input.value = ""; //사용자 입력칸 빈칸 리셋
-    input.focus(); //입력창에 포커스
+    //text기준으로 로컬 스토리지에 삭제되므로, 같은 text면 등록 방지
+    if (sameTodo(text)) {
+      alert("이미 같은 할 일이 존재합니다!");
+      input.value = ""; //사용자 입력칸 빈칸 리셋
+      input.focus(); //입력창에 포커스
+    } else {
+      addToList(text, false);
+      saveLocalStorage(text, false);
+      input.value = ""; //사용자 입력칸 빈칸 리셋
+      input.focus(); //입력창에 포커스
+    }
   } else {
     alert("할 일을 작성해주세요!");
   }
 
   getDoneCount();
   getTodoCount();
-
 });
 
 let doneCount = 0;
@@ -73,20 +79,18 @@ function addToList(text, checked) {
     if (doneCount === todos.length) {
       alert("축하합니다! 모든 할 일을 다하셨어요!");
     }
-    
   });
 
   //삭제버튼 클릭 시 해당 아이템 삭제
   deleteBtn.addEventListener("click", () => {
-    if(confirm("할 일을 삭제하시겠습니까?")){
+    if (confirm("할 일을 삭제하시겠습니까?")) {
       li.remove();
       deleteLocalStorage(text);
       getTodoCount();
       getDoneCount();
-      alert("삭제 완료")
-      
-    }else{
-      alert("삭제 취소")
+      alert("삭제 완료");
+    } else {
+      alert("삭제 취소");
     }
   });
 
@@ -142,4 +146,10 @@ function deleteLocalStorage(text) {
   let todos = JSON.parse(localStorage.getItem("todos")) || [];
   todos = todos.filter((todo) => todo.text !== text);
   localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+//로컬스토리지에서 이미 있는 일인지 확인
+function sameTodo(text) {
+  let todos = JSON.parse(localStorage.getItem("todos")) || [];
+  return todos.some((todo) => todo.text === text);
 }
