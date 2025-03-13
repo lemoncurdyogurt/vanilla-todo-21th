@@ -50,7 +50,6 @@ function addToList(text, checked) {
 
   let span = document.createElement("span");
   span.textContent = text;
-
   //삭제 버튼 추가
   let deleteBtn = document.createElement("button");
   deleteBtn.textContent = "삭제";
@@ -79,10 +78,16 @@ function addToList(text, checked) {
 
   //삭제버튼 클릭 시 해당 아이템 삭제
   deleteBtn.addEventListener("click", () => {
-    li.remove();
-    deleteLocalStorage(text);
-    getTodoCount();
-    getDoneCount();
+    if(confirm("할 일을 삭제하시겠습니까?")){
+      li.remove();
+      deleteLocalStorage(text);
+      getTodoCount();
+      getDoneCount();
+      alert("삭제 완료")
+      
+    }else{
+      alert("삭제 취소")
+    }
   });
 
   li.append(checkBox);
