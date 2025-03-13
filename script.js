@@ -27,31 +27,46 @@ submitBtn.addEventListener("click", (event) => {
 
   if (text !== "") {
     addToList(text, false);
-    saveLocalStorage(text,false);
+    saveLocalStorage(text, false);
     input.value = ""; //사용자 입력칸 빈칸 리셋
     input.focus(); //입력창에 포커스
-  }
-  else{
-    alert("할 일을 작성해주세요!")
+  } else {
+    alert("할 일을 작성해주세요!");
   }
 });
 
-function addToList(text) {
+function addToList(text, checked) {
   const list = document.querySelector("#list");
   let li = document.createElement("li");
   let checkBox = document.createElement("input");
   checkBox.type = "checkbox";
-  //checkBox.checked = checked;
+  checkBox.checked = checked;
 
-  li.append(checkBox); 
-  li.append(text); 
+  let span = document.createElement("span");
+  span.textContent = text;
+  //체크 여부에 따라 스타일 변경
+  if (checked) {
+    span.style.textDecoration = "line-through";
+  }
+
+  checkBox.addEventListener("change", () => {
+    doneList(text, checkBox.checked);
+
+    span.style.textDecoration = checkBox.checked ? "line-through" : "none";
+
+    getTodoCount();
+    getDoneCount();
+  });
+
+  li.append(checkBox);
+  li.append(span);
   list.append(li); // 리스트에 li 추가
 }
 
 //로컬스토리지에 저장
-function saveLocalStorage(text,checked){
+function saveLocalStorage(text, checked) {
   let todos = JSON.parse(localStorage.getItem("todos")) || [];
-  todos.push({text,checked});
+  todos.push({ text, checked });
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
@@ -59,4 +74,36 @@ function saveLocalStorage(text,checked){
 function loadList() {
   let todos = JSON.parse(localStorage.getItem("todos")) || [];
   todos.forEach(({ text, checked }) => addToList(text, checked));
+}
+
+function doneList(text, checked) {
+  let todos = JSON.parse(localStorage.getItem("todos")) || [];
+  todos = todos.map((todo) =>
+    todo.text === text ? { ...todo, checked: checked } : todo
+  );
+
+  localStorage.setItem("todos", JSON.stringify(todos));
+
+  getDoneCount();
+  getTodoCount();
+}
+
+function getTodoCount() {
+  let todos = JSON.parse(localStorage.getItem("todos")) || [];
+  let todoCount = todos.filter((todo) => !todo.checked).length;
+
+  document.querySelector("#todoCount").innerHTML = todoCount;
+}
+
+function getDoneCount() {
+  let todos = JSON.parse(localStorage.getItem("todos")) || [];
+  let doneCount = todos.filter((todo) => todo.checked).length;
+
+  if (doneCount === todos.length){
+    alert("축하합니다! 모든 할 일을 다하셨어요!")
+  }
+
+  document.querySelector("#doneCount").innerHTML = doneCount;
+
+
 }
