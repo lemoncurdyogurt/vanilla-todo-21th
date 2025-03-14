@@ -62,7 +62,7 @@ function addToList(text, checked) {
   //체크 여부에 따라 스타일 변경
   if (checked) {
     span.style.textDecoration = "line-through";
-    span.style.color = "grey";
+    span.style.color = "gray";
   }else{
     span.style.color="white"
   }
@@ -71,7 +71,7 @@ function addToList(text, checked) {
     doneList(text, checkBox.checked);
 
     span.style.textDecoration = checkBox.checked ? "line-through" : "none";
-    span.style.color = checkBox.checked ? "grey" : "white";
+    span.style.color = checkBox.checked ? "gray" : "white";
 
     getTodoCount();
     getDoneCount();
